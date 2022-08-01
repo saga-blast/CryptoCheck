@@ -1,0 +1,1270 @@
+# My drive path
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+
+
+
+# Accuracy Of Different Techniques
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:,30]
+print(y)
+d=DecisionTreeClassifier()
+X=X.astype(int)
+y=y.astype(int)
+d.fit(X,y)
+scores =cross_val_score(d, X, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+r=RandomForestClassifier()
+r.fit(X,y)
+scores =cross_val_score(r, X, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+et=ExtraTreesClassifier()
+et.fit(X,y)
+scores =cross_val_score(et, X, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+
+
+
+
+# Gini DecisionTree
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+Y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=100)
+clf_gini = DecisionTreeClassifier(criterion = "gini", random_state = 100,
+                               max_depth=3, min_samples_leaf=5)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+clf_gini.fit(X_train, y_train)
+
+
+#Prediction of gini
+
+y_pred=clf_gini.predict(X_test)
+y_pred
+y_test=y_test.astype(int)
+y_pred=y_pred.astype(int)
+print ("Accuracy is " + str(accuracy_score(y_test,y_pred)*100))
+
+
+
+
+
+# Entropy DecisionTree
+
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+Y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=100)
+clf_entropy = DecisionTreeClassifier(criterion = "entropy", random_state = 100,
+                               max_depth=3, min_samples_leaf=5)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+clf_entropy.fit(X_train, y_train)
+
+
+
+
+
+
+
+# Prediction Of Entropy
+
+
+y_pred=clf_entropy.predict(X_test)
+y_pred
+y_test=y_test.astype(int)
+y_pred=y_pred.astype(int)
+print ("Accuracy is " + str(accuracy_score(y_test,y_pred)*100))
+
+
+
+
+
+
+
+# Different Techniques Accuracy Using Training Data
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
+clf_gini = DecisionTreeClassifier(criterion = "gini", random_state = 100,
+                               max_depth=3, min_samples_leaf=5)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+clf_gini.fit(X_train, y_train)
+scores =cross_val_score(clf_gini, X_train, y_train, cv=10, scoring='accuracy')
+print(scores.mean())
+
+r=RandomForestClassifier()
+r.fit(X_train,y_train)
+scores =cross_val_score(r, X_train, y_train, cv=10, scoring='accuracy')
+print(scores.mean())
+
+et=ExtraTreesClassifier()
+et.fit(X_train,y_train)
+scores =cross_val_score(et, X_train, y_train, cv=10, scoring='accuracy')
+print(scores.mean())
+
+
+
+
+
+
+
+
+# Different Techniques Accuracy Using Testing data2
+
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
+clf_gini = DecisionTreeClassifier(criterion = "gini", random_state = 100,
+                               max_depth=3, min_samples_leaf=5)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+X_test=X_test.astype(int)
+y_test=y_test.astype(int)
+clf_gini.fit(X_train, y_train)
+scores =cross_val_score(clf_gini, X_test, y_test, cv=10, scoring='accuracy')
+print(scores.mean())
+
+r=RandomForestClassifier()
+r.fit(X_train,y_train)
+scores =cross_val_score(r, X_test, y_test, cv=10, scoring='accuracy')
+print(scores.mean())
+
+et=ExtraTreesClassifier()
+et.fit(X_train,y_train)
+scores =cross_val_score(et, X_test, y_test, cv=10, scoring='accuracy')
+print(scores.mean())
+
+
+
+
+
+
+
+# Feature Selection
+
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn.feature_selection import SelectFromModel
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+clf = ExtraTreesClassifier()
+X=X.astype(int)
+y=y.astype(int)
+clf = clf.fit(X, y)
+clf.feature_importances_
+model = SelectFromModel(clf, prefit=True)
+X_new = model.transform(X)
+X_new.shape 
+
+
+
+
+
+
+
+
+# Feature Importance
+
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn.feature_selection import SelectFromModel
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+clf = ExtraTreesClassifier()
+X=X.astype(int)
+y=y.astype(int)
+clf = clf.fit(X, y)
+clf.feature_importances_ 
+
+
+
+
+
+
+# Find The Mean Value 
+
+
+
+clf.feature_importances_.mean()
+
+
+
+
+
+
+
+# Lasso Regression
+
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+X_test=X_test.astype(int)
+y_test=y_test.astype(int)
+lasso=Lasso(alpha=0.1)
+lasso.fit(X_train,y_train)
+lasso_pred=lasso.predict(X_test)
+lasso.score(X_test,y_test)
+
+
+
+
+
+
+
+
+# *DIFFERENT TECHNIQUE ACCURACY USING SELECTED FEATURES *
+
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+clf = ExtraTreesClassifier()
+X=X.astype(int)
+y=y.astype(int)
+clf = clf.fit(X, y)
+clf.feature_importances_
+model = SelectFromModel(clf, prefit=True)
+X_new = model.transform(X)
+#X_new.shape
+X_new=X_new.astype(int)
+clf.fit(X_new,y)
+scores =cross_val_score(clf, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+d=DecisionTreeClassifier()
+d.fit(X_new,y)
+scores =cross_val_score(d, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+r=RandomForestClassifier()
+r.fit(X_new,y)
+scores =cross_val_score(r, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+
+
+from numpy import median
+thresh=median(clf.feature_importances_)
+model = SelectFromModel(clf,threshold=thresh, prefit=True)
+
+
+
+
+from numpy import mean
+thresh=mean(clf.feature_importances_)
+model = SelectFromModel(clf,threshold=thresh, prefit=True)
+
+
+
+
+
+
+
+
+# Using LassoLarsCV regression find column name with their coeffficient
+
+
+
+from sklearn.linear_model import LassoLarsCV
+from sklearn import preprocessing
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn.feature_selection import SelectFromModel
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+#names=balance_data.drop('Landmass','area', axis=1).columns
+#lasso=Lasso(alpha=0.1)
+model=LassoLarsCV(cv=10, precompute=False).fit(X,y)
+
+#print variable names and regression coefficients
+print (dict(zip(balance_data.columns, model.coef_)))
+
+
+
+
+
+
+
+# PLOT DIAGRAM OF FEATURE USING LASSO
+
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+names=balance_data.drop(['Landmass','Area'], axis=1).columns
+#names=names.drop('Area', axis=1).columns
+lasso=Lasso(alpha=0.1)
+lasso_coef=lasso.fit(X,y).coef_
+print(lasso_coef.shape)
+plt.plot(range(len(names)), lasso_coef)
+plt.xticks(range(len(names)), names, rotation=60)
+plt.yticks(lasso_coef)
+#plt.plot(range(len(names)), lasso_coef+1)
+plt.show()
+
+
+
+
+
+
+
+
+
+# Using lassoLarsCV technique do feature reduction as well as get accuracy of 3 diffrent ML technique
+
+
+
+
+from sklearn.linear_model import LassoLarsCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn import preprocessing
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn.feature_selection import SelectFromModel
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+#names=balance_data.drop('Landmass','area', axis=1).columns
+#lasso=Lasso(alpha=0.1)
+model=LassoLarsCV(cv=10, precompute=False).fit(X,y)
+val=model.coef_.mean()
+c=0
+a=[]
+i=0
+for i in range(0,29):
+    if model.coef_[i] >= val:
+        c = c + 1
+        a=np.append(a,i)
+        print (i+model.coef_[i])
+        
+print("no. of features : "+str(c))
+int_a=[]
+for item in a:
+     int_a.append(int(item))
+X_new = balance_data.values[:,int_a]
+clf = ExtraTreesClassifier()
+y=y.astype(int)
+X_new=X_new.astype(int)
+clf.fit(X_new,y)
+scores =cross_val_score(clf, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+d=DecisionTreeClassifier()
+d.fit(X_new,y)
+scores =cross_val_score(d, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+r=RandomForestClassifier()
+r.fit(X_new,y)
+scores =cross_val_score(r, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+
+
+
+
+
+
+
+# Using Lasso Regression do feature reduction as well as get accuracy of 3 diffrent ML Technique
+
+
+
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn.feature_selection import SelectFromModel
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+#names=balance data.drop('Landmass','area', axis=1).columns
+#lasso=Lasso(alpha=0.1)
+model=lasso.fit(X,y)
+print(dict(zip(balance_data.columns, model.coef_)))
+val=model.coef_.mean()
+c=0
+a=[]
+i=0
+for i in range(0,29):
+    if model.coef_[i] >= val:
+        c = c + 1
+        a=np.append(a,i)
+        print (i+model.coef_[i])
+        
+print("no. of features : "+str(c))
+int_a=[]
+for item in a:
+     int_a.append(int(item))
+X_new = balance_data.values[:,int_a]
+clf = ExtraTreesClassifier()
+y=y.astype(int)
+X_new=X_new.astype(int)
+clf.fit(X_new,y)
+scores =cross_val_score(clf, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+d=DecisionTreeClassifier()
+d.fit(X_new,y)
+scores =cross_val_score(d, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+r=RandomForestClassifier()
+r.fit(X_new,y)
+scores =cross_val_score(r, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+
+
+
+
+
+
+
+# for alpha = 0.1 lasso
+
+
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+X_test=X_test.astype(int)
+y_test=y_test.astype(int)
+lasso=Lasso(alpha=0.1)   #// or alpha=0.05
+lasso.fit(X_train,y_train)
+#predictors = balance_data.values[0]
+predictors=balance_data.drop(['Landmass','Religion'], axis=1).columns
+coef = Series(lasso.coef_,predictors).sort_values()
+
+coef.plot(kind='bar', title='Model Coefficients')
+
+
+
+
+
+
+
+
+# for alpha = 0.05 lasso
+
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from pandas import Series, DataFrame
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+X_test=X_test.astype(int)
+y_test=y_test.astype(int)
+lasso=Lasso(alpha=0.1)
+lasso.fit(X_train,y_train)
+#predictors = balance_data.values[0]
+predictors=balance_data.drop(['Religion','Sl.No.'], axis=1).columns
+coef = Series(lasso.coef_,predictors).sort_values()
+
+coef.plot(kind='bar', title='Model Coefficients')
+plt.xlabel('Features')
+plt.ylabel('Scores')
+
+
+
+
+
+
+
+
+
+# for cv=10 lassolarsCV
+
+
+
+
+
+from sklearn.linear_model import LassoLarsCV
+import numpy as np
+import pandas as pd
+from pandas import Series, DataFrame
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LassoLarsCV
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+X_test=X_test.astype(int)
+y_test=y_test.astype(int)
+model=LassoLarsCV(cv=10, precompute=False)
+#lasso=Lasso(alpha=0.1)   #// or alpha=0.05
+model.fit(X_train,y_train)
+#predictors = balance_data.values[0]
+predictors=balance_data.drop(['Religion','Sl.No.'], axis=1).columns
+coef = Series(model.coef_,predictors).sort_values()
+
+coef.plot(kind='bar', title='Model Coefficients')
+
+
+
+
+
+
+
+
+
+# using Lasso Regression do feature reduction as well as get accuracy of 3 diff. ml technique where features taken from graph where alpha=0.05
+
+
+
+
+
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn.feature_selection import SelectFromModel
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+#names=balance_data.drop('Landmass','area', axis=1).columns
+lasso=Lasso(alpha=0.5)
+model=lasso.fit(X,y)
+#balance_data['Country_Name'].astype(str).astype(int)
+X_new = balance_data.loc[:,["Sunstars", "Area", "Language","Population"]]#for alpha=0.1, X_new=balance_data.loc[:,["Mainhue", "White",                                                                                                                                                                    					 "Language","Population","Colours","Sunstars","Landmass","Botright","Stripes","Green"]]
+clf = ExtraTreesClassifier()
+y=y.astype(int)
+X_new=X_new.astype(int)
+clf.fit(X_new,y)
+scores =cross_val_score(clf, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+d=DecisionTreeClassifier()
+d.fit(X_new,y)
+scores =cross_val_score(d, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+r=RandomForestClassifier()
+r.fit(X_new,y)
+scores =cross_val_score(r, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+
+
+
+
+
+
+
+# using LassoLarsCV technique do feature reduction as well as get accuracy of 3 diff. ml technique where features from graph
+
+
+
+
+from sklearn.linear_model import LassoLarsCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn import preprocessing
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn.feature_selection import SelectFromModel
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+#names=balance_data.drop('Landmass','area', axis=1).columns
+#lasso=Lasso(alpha=0.1)
+model=LassoLarsCV(cv=10, precompute=False).fit(X,y)
+
+X_new = balance_data.loc[:,["Landmass", "Botright", "Stripes", "Language", "Green", "Red", "Orange", "Triangle", "Saltires"]]
+clf = ExtraTreesClassifier()
+y=y.astype(int)
+X_new=X_new.astype(int)
+clf.fit(X_new,y)
+scores =cross_val_score(clf, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+d=DecisionTreeClassifier()
+d.fit(X_new,y)
+scores =cross_val_score(d, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+r=RandomForestClassifier()
+r.fit(X_new,y)
+scores =cross_val_score(r, X_new, y, cv=10, scoring='accuracy')
+print(scores.mean())
+
+
+
+
+
+
+
+
+# feature graph by select from model
+
+
+
+
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,2:30]
+y = balance_data.values[:, 30]
+clf = ExtraTreesClassifier()
+X=X.astype(int)
+y=y.astype(int)
+clf = clf.fit(X, y)
+clf.feature_importances_
+predictors=balance_data.drop(['Landmass','Religion','Sl.No.'], axis=1).columns
+coef = Series(clf.feature_importances_,predictors).sort_values()
+
+coef.plot(kind='bar', title='Model Coefficients')
+
+
+
+
+
+
+
+# how to get features name from selectfrommodel
+
+
+
+
+
+from sklearn.feature_selection import SelectFromModel
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+balance_data.drop('Sl.No.', axis=1)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+clf = ExtraTreesClassifier()
+X=X.astype(int)
+y=y.astype(int)
+clf = clf.fit(X, y)
+clf.feature_importances_
+model = SelectFromModel(clf, prefit=True)
+
+X_new=model.transform(X)
+X_new.shape
+
+feature_idx = model.get_support(indices=True)
+feature_name = balance_data.columns[feature_idx+1]
+print(feature_name)
+
+
+
+
+
+
+
+# thru LassoLarsCv find alpha values for Lasso
+
+
+
+
+
+from sklearn.linear_model import LassoLarsCV
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn import preprocessing
+import numpy as np
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn.feature_selection import SelectFromModel
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+#names=balance_data.drop('Landmass','area', axis=1).columns
+#lasso=Lasso(alpha=0.1)
+model=LassoLarsCV(cv=10, precompute=False).fit(X,y)
+model.alphas_
+
+
+
+
+
+
+
+
+# for ExtraTreeClassifier how to get threshold value
+
+
+
+
+
+
+import numpy as np
+import pandas as pd
+from numpy import sort
+from sklearn.metrics import accuracy_score
+from sklearn.ensemble import ExtraTreesClassifier
+from pandas import Series, DataFrame
+from sklearn.feature_selection import SelectFromModel
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LassoLarsCV
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn import metrics
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+X_test=X_test.astype(int)
+y_test=y_test.astype(int)
+model = ExtraTreesClassifier()
+model.fit(X_train, y_train)
+ 
+# make predictions for test data and evaluate
+pred_y = model.predict(X_test)
+predictions = [round(value) for value in pred_y]
+accuracy = metrics.accuracy_score(y_test, predictions)
+print("ETC Accuracy: %.2f%%" % (accuracy * 100.0))
+ 
+# fit model using each importance as a threshold
+thresholds = sort(model.feature_importances_)
+for thresh in thresholds:
+    # selecting features using threshold
+    selection = SelectFromModel(model, threshold=thresh, prefit=True)
+    select_train_x = selection.transform(X_train)
+    
+    # training model
+    selection_model = ExtraTreesClassifier()
+    selection_model.fit(select_train_x, y_train)
+    
+    # evaluating model
+    select_test_x = selection.transform(X_test)
+    pred_y = selection_model.predict(select_test_x)
+    predictions = [round(value) for value in pred_y]
+    accuracy = metrics.accuracy_score(y_test, predictions)
+    print("Thresh=%.3f, n=%d, Accuracy: %.2f%%" % (thresh, select_train_x.shape[1], accuracy*100.0))
+	
+	
+
+
+
+
+	
+	
+# find thresh for RandomForest
+
+
+
+from numpy import sort
+from sklearn.metrics import accuracy_score
+import numpy as np
+import pandas as pd
+from pandas import Series, DataFrame
+from sklearn.feature_selection import SelectFromModel
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LassoLarsCV
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn import metrics
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+X_test=X_test.astype(int)
+y_test=y_test.astype(int)
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+ 
+# make predictions for test data and evaluate
+pred_y = model.predict(X_test)
+predictions = [round(value) for value in pred_y]
+accuracy = metrics.accuracy_score(y_test, predictions)
+print("RFC Accuracy: %.2f%%" % (accuracy * 100.0))
+ 
+# fit model using each importance as a threshold
+thresholds = sort(model.feature_importances_)
+for thresh in thresholds:
+    # selecting features using threshold
+    selection = SelectFromModel(model, threshold=thresh, prefit=True)
+    select_train_x = selection.transform(X_train)
+    
+    # training model
+    selection_model = RandomForestClassifier()
+    selection_model.fit(select_train_x, y_train)
+    
+    # evaluating model
+    select_test_x = selection.transform(X_test)
+    pred_y = selection_model.predict(select_test_x)
+    predictions = [round(value) for value in pred_y]
+    accuracy = metrics.accuracy_score(y_test, predictions)
+    print("Thresh=%.3f, n=%d, Accuracy: %.2f%%" % (thresh, select_train_x.shape[1], accuracy*100.0))
+	
+
+
+
+	
+	
+	
+	
+# using randomforest find feature importance with graph
+
+
+from numpy import sort
+from sklearn.metrics import accuracy_score
+import numpy as np
+import pandas as pd
+from pandas import Series, DataFrame
+from sklearn.feature_selection import SelectFromModel
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LassoLarsCV
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn import metrics
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+X_test=X_test.astype(int)
+y_test=y_test.astype(int)
+model = RandomForestClassifier()
+model.fit(X_train, y_train)
+names=balance_data.drop(['Religion','Sl.No.'], axis=1).columns
+importances = pd.DataFrame({'feature':names,'importance':np.round(model.feature_importances_,3)})
+importances = importances.sort_values('importance',ascending=False).set_index('feature')
+ 
+print(importances)
+importances.plot.bar()
+
+
+
+
+
+
+
+
+
+# using ExtraTrees find feature importance with graph
+
+
+
+from numpy import sort
+from sklearn.metrics import accuracy_score
+import numpy as np
+import pandas as pd
+from pandas import Series, DataFrame
+from sklearn.feature_selection import SelectFromModel
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LassoLarsCV
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+from sklearn.linear_model import Lasso
+from sklearn import metrics
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+X = balance_data.values[:,1:30]
+y = balance_data.values[:, 30]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=100)
+X_train=X_train.astype(int)
+y_train=y_train.astype(int)
+X_test=X_test.astype(int)
+y_test=y_test.astype(int)
+model = ExtraTreesClassifier()
+model.fit(X_train, y_train)
+names=balance_data.drop(['Religion','Sl.No.'], axis=1).columns
+importances = pd.DataFrame({'feature':names,'importance':np.round(model.feature_importances_,3)})
+importances = importances.sort_values('importance',ascending=False).set_index('feature')
+ 
+print(importances)
+importances.plot.bar()
+
+
+
+
+
+
+
+
+
+# compare accuracy results of 3 techniques for different threshold values
+
+
+ 
+
+import numpy as np
+import matplotlib.pyplot as plt
+ 
+# data to plot
+n_groups = 3
+means_acc = (0.691,0.588,0.646)
+median_acc = (0.679,0.559,0.621)             
+thresh_acc = (0.657,0.565,0.624)
+noThresh_acc = (0.630,0.555,0.608)
+      
+# create plot
+fig, ax = plt.subplots(figsize=(10,5))
+index = np.arange(n_groups)
+bar_width = 0.15
+opacity = 0.8
+ 
+rects1 = plt.bar(index, means_acc, bar_width,
+                 alpha=opacity,
+                 color='b',
+                 label='Mean_Acc')
+ 
+rects2 = plt.bar(index + bar_width, median_acc, bar_width,
+                 alpha=opacity,
+                 color='g',
+                 label='Median_Acc')
+rects3 = plt.bar(index + bar_width +bar_width, thresh_acc, bar_width,
+                 alpha=opacity,
+                 color='r',
+                 label='Thresh_Acc')
+ 
+rects4 = plt.bar(index + bar_width +bar_width +bar_width, noThresh_acc, bar_width,
+                 alpha=opacity,
+                 color='y',
+                 label='NoThresh_Acc')
+ 
+plt.xlabel('Classification_Type')
+plt.ylabel('Scores')
+plt.ylim([0,1] )
+plt.title('Scores by different classifications with different threshold Values  ')
+plt.xticks(index + bar_width, ('RandomForest', 'DecissionTrees', 'ExtraTrees'))
+plt.legend()
+ 
+plt.tight_layout()
+plt.show()
+
+
+
+
+
+
+
+
+
+
+# Scores by different classifications with feature selection and without feature selection
+
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+ 
+# data to plot
+n_groups = 3
+select_acc = (0.691,0.588,0.646)
+lasso_acc = (0.671,0.62,0.591)             
+noFeaSelect_acc = (0.635,0.565,0.628)
+
+      
+# create plot
+fig, ax = plt.subplots(figsize=(10,5))
+index = np.arange(n_groups)
+bar_width = 0.15
+opacity = 0.8
+ 
+rects1 = plt.bar(index, select_acc, bar_width,
+                 alpha=opacity,
+                 color='b',
+                 label='SelectFeature_Acc')
+ 
+rects2 = plt.bar(index + bar_width, lasso_acc, bar_width,
+                 alpha=opacity,
+                 color='g',
+                 label='Lasso_Acc')
+rects3 = plt.bar(index + bar_width +bar_width, noFeaSelect_acc, bar_width,
+                 alpha=opacity,
+                 color='r',
+                 label='NoFeatureSelection_Acc')
+ 
+ 
+plt.xlabel('Classification_Type')
+plt.ylabel('Scores')
+plt.ylim([0,1] )
+plt.title('Scores by different classifications with feature selection and without feature selection  ')
+plt.xticks(index + bar_width, ('RandomForest', 'DecissionTrees', 'ExtraTrees'))
+plt.legend()
+ 
+plt.tight_layout()
+plt.show()
+
+
+
+
+
+
+
+
+# find features graphically from selectFromModel
+
+
+
+
+
+import matplotlib.pyplot as plt
+from pandas import Series, DataFrame
+from sklearn.feature_selection import SelectFromModel
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+import numpy as np
+import pandas as pd
+from numpy import mean
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+from sklearn import tree
+from sklearn.model_selection import cross_val_score
+from sklearn import model_selection
+balance_data = pd.read_csv("/content/drive/MyDrive/Flag.data2.csv", sep=',', header=0)
+#balance_data.drop('Sl.No.', axis=1)
+X = balance_data.values[:,2:30]
+y = balance_data.values[:, 30]
+clf = RandomForestClassifier()
+X=X.astype(int)
+y=y.astype(int)
+clf = clf.fit(X, y)
+print(X.shape)
+clf.feature_importances_
+thresh=mean(clf.feature_importances_)
+model = SelectFromModel(clf,threshold=None, prefit=True)
+
+X_new=model.transform(X)
+X_new.shape
+X_new=X_new.astype(int)
+feature_idx = model.get_support(indices=True)
+feature_name = balance_data.columns[feature_idx+1]
+clf1 = clf.fit(X_new, y)
+coef = Series(clf1.feature_importances_,feature_name).sort_values()
+
+coef.plot(kind='bar', title='Model Coefficients')
+plt.xlabel('Features')
+plt.ylabel('Scores')
+
+
+
+
+
